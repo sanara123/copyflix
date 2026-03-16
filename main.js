@@ -167,8 +167,7 @@ async function loadData() {
   }
 
   try {
-    // Em vez de usar as listas da conta (que podem estar vazias),
-    // usamos endpoints públicos do TMDB que SEMPRE retornam conteúdo.
+    
     const [trendingRes, seriesRes, moviesRes] = await Promise.all([
       fetchFromApi("trending/all/week", { language: "pt-BR", page: 1 }),
       fetchFromApi("tv/popular", { language: "pt-BR", page: 1 }),
