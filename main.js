@@ -151,3 +151,55 @@ function renderRow(containerId, items) {
 }
 
 
+
+async function loadData() {
+  // Se não houver config de API, apenas registra um aviso e não tenta buscar
+  if (!cfg.baseUrl || !cfg.apiKey) {
+    console.error(
+      "[Copyflix] Defina 'baseUrl' e 'apiKey' em config.js para carregar dados da API."
+    );
+    heroItems = [];
+    renderHero();
+    renderRow("row-trending", []);
+    renderRow("row-series", []);
+    renderRow("row-movies", []);
+    return;
+  }
+
+  try {
+    // Em vez de usar as listas da conta (que podem estar vazias),
+    // usamos endpoints públicos do TMDB que SEMPRE retornam conteúdo.
+    const [trendingRes, seriesRes, moviesRes] = await Promise.all([
+      fetchFromApi("trending/all/week", { language: "pt-BR", page: 1 }),
+      fetchFromApi("tv/popular", { language: "pt-BR", page: 1 }),
+      fetchFromApi("movie/popular", { language: "pt-BR", page: 1 }),
+    ]);
+
+    const trending = trendingRes?.results ?? [];
+    const series = seriesRes?.results ?? [];
+    const movies = moviesRes?.results ?? [];
+
+    // Destaque usa os primeiros itens de "trending"
+    heroItems = trending.slice(0, 5);
+    renderHero();
+
+    // Listas
+    renderRow("row-trending", trending.slice(0, 18));
+    renderRow("row-series", series.slice(0, 18));
+    renderRow("row-movies", movies.slice(0, 18));
+    restartHeroTimer();
+  } catch (error) {
+    console.error("[Copyflix] Falha ao carregar dados da API:", error);
+    heroItems = [];
+    renderHero();
+    renderRow("row-trending", []);
+    renderRow("row-series", []);
+    renderRow("row-movies", []);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadData();
+});
+
+
