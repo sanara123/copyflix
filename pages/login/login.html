@@ -8,27 +8,36 @@
 
 </head>
 <body>
-    <header class="top-nav">
-        <div class="nav-left">
-            <div class="logo">COPYFLIX</div>
-            <nav class="main-menu">
-                <a href="/index.html" class="active">Inicio</a>
-                <a href="/pages/contas/conta.html">Conta</a>
-                <a href="/pages/perfil/perfil.html">Perfil</a>
-                <a href="#">Filmes</a>
-                <a href="#">Series</a>
-                <a href="#">Minha lista</a>
-            </nav>
-        </div>
-        <div class="nav-right"> 
-            <button class="icon-button" arial-label="Buscar">
-                🔍
-            </button>
-            <button class="icon-button" arial-label="Notificações">
-                🔔
-            </button>
-            <div class="profile"></div>
-        </div>
-    </header>
+
+<main>
+    <section class="hero">
+      <h1>Entrar na sua conta</h1>
+      <p class="subtitulo"></p>
+      <form class="form-cta" id="formCta" action="/">
+        <input type="email" id="Email" placeholder="Email" required>
+        <input type="password" id="Senha" placeholder="sua senha" required>
+        <button type="submit" class="btn-submit">Entrar</button>
+
+      </form>
+      <p class="aviso"></p>
+    </section>
+
+    <section class="beneficios">
+      <h2>Por que ter uma conta?</h2>
+      <div class="cards">
+        <article class="card">
+          <span class="card-icone">🎯</span>
+          <h3>FILMES E SÉRIES EXCLUSIVOS</h3>
+          <p>Defina objetivos e acompanhe sua evolução passo a passo.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© COPYFLIX</p>
+  </footer>
+   </form>
 </body>
 </html>
+
